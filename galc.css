@@ -1,11 +1,11 @@
 body {
-    background: #f00;
+    background: #000;
 }
 
 .calc-main {
+    background: #181818;
     font-family: 'Roboto', sans-serif;
     font-size: 36px;
-    background: #111;
     height: 100%;
     display: flex;
     flex-flow: column nowrap;
@@ -18,7 +18,6 @@ body {
 
     display: flex;
     flex-flow: row nowrap;
-    /* justify-content: center; */
 }
 
 .calc-button {
@@ -35,7 +34,12 @@ body {
     right: 8px;
     top: 8px;
     bottom: 8px;
-    text-align: center;
+
+    display: flex;
+    align-items: center;
+    /* can't get both horizontal and vertical centering to work >.<
+       so use flex for vertical centering and just apply a fixed padding for horizontal */
+    padding: 0px 30px;
 
     color: #fff;
     background: #00b;
