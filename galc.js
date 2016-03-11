@@ -1,3 +1,3 @@
-function test() {
-    alert('hi test');
+function main() {
+    console.log('TODO: write code here.');
 }
