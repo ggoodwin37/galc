@@ -105,9 +105,9 @@ function handleEquals() {
         console.error('unexpected state.op');
         break;
     }
-    console.log('equals: memory=' + state.memory + ' input=' + inputVal + ' result=' + result);
     setResultDisplay(result);
     state.memory = result;
+    state.op = null;
     resetInput();
 }
 
