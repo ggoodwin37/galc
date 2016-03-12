@@ -52,6 +52,12 @@ body {
 .calc-button:active {
     background: #00f;
 }
+.calc-op {
+    background: #44c;
+}
+.calc-util {
+    background: #779;
+}
 
 .calc-result-row {
     flex: 1;
