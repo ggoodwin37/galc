@@ -20,15 +20,15 @@ body {
     flex-flow: row nowrap;
 }
 
-.calc-button {
+.calc-button-frame {
     flex: 1;
     position: relative;
 }
-.calc-button-wide {
+.calc-button-frame-wide {
     flex: 2;
 }
 
-.calc-button-inner {
+.calc-button {
     position: absolute;
     left: 8px;
     right: 8px;
@@ -46,10 +46,10 @@ body {
     border: 1px solid #eee;
     border-radius: 4px;
 }
-.calc-button-inner:hover {
+.calc-button:hover {
     background: #40f;
 }
-.calc-button-inner:active {
+.calc-button:active {
     background: #00f;
 }
 
