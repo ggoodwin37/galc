@@ -1,18 +1,20 @@
 
-// three pieces of state:
 //  memory: the float value in memory, result of last calculation
 //  op: the current operation in progress, if any
 //  input: the current input, represented as a string
+//  showingResult: a flag set to true if we are currently showing result of "equals"
 var state = {
     memory: 0,
     op: null,
-    input: '0'
+    input: '0',
+    showingResult: false
 };
 
 function clearState() {
     state.memory = 0;
     state.op = null;
     state.input = '0';
+    state.showingResult = false;
     setResultDisplay(state.input);
 }
 
@@ -26,6 +28,12 @@ function setResultDisplay(displayStr) {
 }
 
 function handleDigit(digitStr) {
+    // if we were showing a result, next digit starts a fresh input.
+    if (state.showingResult) {
+        resetInput();
+    }
+    state.showingResult = false;
+
     // special cases for initial state
     if (state.input === '0') {
         // don't show multiple zeroes
@@ -39,16 +47,6 @@ function handleDigit(digitStr) {
         state.input += digitStr;
     }
     setResultDisplay(state.input);
-}
-
-function handleBinaryOperator(op) {
-    if (state.op !== null) {
-        handleEquals();
-    } else {
-        state.memory = parseFloat(state.input);
-    }
-    resetInput();
-    state.op = op;
 }
 
 function handleOpposite() {
@@ -68,13 +66,9 @@ function handlePercent() {
     setResultDisplay(state.input);
 }
 
-function handleEquals() {
-    if (state.op === null) {
-        return;
-    }
-
+function evaluateOp() {
     var inputVal = parseFloat(state.input);
-    var result;
+    var result = null;
     switch(state.op) {
     case 'add':
         result = state.memory + inputVal;
@@ -92,10 +86,33 @@ function handleEquals() {
         console.error('unexpected state.op');
         break;
     }
-    setResultDisplay(result);
-    state.memory = result;
-    state.op = null;
+    return result;
+}
+
+function handleBinaryOperator(op) {
+    if (state.op !== null) {
+        var result = evaluateOp();
+        state.memory = result;
+    } else {
+        state.memory = parseFloat(state.input);
+    }
+    setResultDisplay(state.memory);
     resetInput();
+    state.op = op;
+}
+
+function handleEquals() {
+    if (state.op === null) {
+        return;
+    }
+
+    var result = evaluateOp();
+    state.memory = result;
+    state.input = '' + result;
+    setResultDisplay(state.input);
+
+    state.op = null;
+    state.showingResult = true;
 }
 
 function handleKey(buttonKey) {
