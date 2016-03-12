@@ -9,14 +9,6 @@ var state = {
     input: '0'
 };
 
-// defines symbols for each op
-var opDisplayMap = {
-    add: '+',
-    subtract: '-',
-    multiply: '*',
-    divide: '/'
-};
-
 function clearState() {
     state.memory = 0;
     state.op = null;
@@ -27,10 +19,6 @@ function clearState() {
 function resetInput() {
     // reset input to default state so we reset display next time.
     state.input = '0';
-}
-
-function setOpDisplay(opStr) {
-    // TODO: need markup
 }
 
 function setResultDisplay(displayStr) {
@@ -61,7 +49,6 @@ function handleBinaryOperator(op) {
     }
     resetInput();
     state.op = op;
-    setOpDisplay(opDisplayMap[op] || '');
 }
 
 function handleOpposite() {
