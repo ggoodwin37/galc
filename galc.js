@@ -56,11 +56,12 @@ function handleDigit(digitStr) {
 function handleBinaryOperator(op) {
     if (state.op !== null) {
         handleEquals();
+    } else {
+        state.memory = parseFloat(state.input);
     }
+    resetInput();
     state.op = op;
     setOpDisplay(opDisplayMap[op] || '');
-    state.memory = parseFloat(state.input);
-    resetInput();
 }
 
 function handleOpposite() {
